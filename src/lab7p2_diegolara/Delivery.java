@@ -285,7 +285,7 @@ public class Delivery extends javax.swing.JFrame {
         tf_cuser.setText("");
         pf_passc.setText("");
         listaUsers.add(new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText()));
-
+        
     }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jb_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ingresarMouseClicked
