@@ -19,6 +19,8 @@ public class Delivery extends javax.swing.JFrame {
     public Delivery() {
         initComponents();
         cb_users.addItem("Admin");
+        tf_prod.setEnabled(false);
+        tf_precio.setEnabled(false);
     }
 
     /**
@@ -50,6 +52,13 @@ public class Delivery extends javax.swing.JFrame {
         tf_locat = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         cb_listr = new javax.swing.JComboBox<>();
+        tf_prod = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jb_addprod = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        tf_precio = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pf_pass = new javax.swing.JPasswordField();
         jb_crearu = new javax.swing.JButton();
@@ -121,26 +130,49 @@ public class Delivery extends javax.swing.JFrame {
         bg3.add(tf_namer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 350, -1));
         bg3.add(tf_locat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 350, -1));
 
-        tp_restaurant.addTab("tab1", bg3);
+        tp_restaurant.addTab("Add", bg3);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(cb_listr, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cb_listr.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_listrItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cb_listr, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 31, 253, -1));
+        jPanel1.add(tf_prod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 360, -1));
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel10.setText("Precio:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 70, -1));
+
+        jb_addprod.setText("Agregar Producto");
+        jb_addprod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_addprodMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jb_addprod, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel11.setText("Nombre del Producto:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 96, 180, -1));
+        jPanel1.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 390, -1));
+
+        tp_restaurant.addTab("Add Product", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(cb_listr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 373, Short.MAX_VALUE)
         );
 
-        tp_restaurant.addTab("tab2", jPanel1);
+        tp_restaurant.addTab("Eliminar", jPanel2);
 
         javax.swing.GroupLayout restLayout = new javax.swing.GroupLayout(rest.getContentPane());
         rest.getContentPane().setLayout(restLayout);
@@ -152,6 +184,8 @@ public class Delivery extends javax.swing.JFrame {
             restLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tp_restaurant)
         );
+
+        jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(100, 0));
@@ -230,7 +264,7 @@ public class Delivery extends javax.swing.JFrame {
         tf_cuser.setText("");
         pf_passc.setText("");
         listaUsers.add(new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText()));
-        
+
     }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jb_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ingresarMouseClicked
@@ -246,14 +280,24 @@ public class Delivery extends javax.swing.JFrame {
             if (!listaUsers.get(cb_users.getSelectedIndex()).getContra().equals(pf_pass.getText())) {
                 JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
             } else {
-                
+
             }
         }
     }//GEN-LAST:event_jb_ingresarMouseClicked
 
     private void jb_addrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addrMouseClicked
         cb_listr.addItem(tf_namer.getText());
+        listaRes.add(new Res(tf_namer.getText(), tf_locat.getText()));
     }//GEN-LAST:event_jb_addrMouseClicked
+
+    private void cb_listrItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_listrItemStateChanged
+        tf_prod.setEnabled(true);
+        tf_precio.setEnabled(true);
+    }//GEN-LAST:event_cb_listrItemStateChanged
+
+    private void jb_addprodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addprodMouseClicked
+        listaRes.get(cb_listr.getSelectedIndex()).getListaProd().add(new Producto(tf_prod.getText(), Double.parseDouble(tf_precio.getText())));
+    }//GEN-LAST:event_jb_addprodMouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,6 +334,7 @@ public class Delivery extends javax.swing.JFrame {
         });
     }
     ArrayList<User> listaUsers = new ArrayList();
+    ArrayList<Res> listaRes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog CrearUser;
     private javax.swing.JPanel bg2;
@@ -297,6 +342,8 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_listr;
     private javax.swing.JComboBox<String> cb_users;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -304,7 +351,10 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jb_addprod;
     private javax.swing.JButton jb_addr;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crearu;
@@ -316,6 +366,8 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JTextField tf_locat;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_namer;
+    private javax.swing.JTextField tf_precio;
+    private javax.swing.JTextField tf_prod;
     private javax.swing.JTabbedPane tp_restaurant;
     // End of variables declaration//GEN-END:variables
 }
