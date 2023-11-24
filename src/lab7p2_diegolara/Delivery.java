@@ -4,6 +4,9 @@
  */
 package lab7p2_diegolara;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -15,6 +18,7 @@ public class Delivery extends javax.swing.JFrame {
      */
     public Delivery() {
         initComponents();
+        cb_users.addItem("Admin");
     }
 
     /**
@@ -26,21 +30,151 @@ public class Delivery extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CrearUser = new javax.swing.JDialog();
+        bg2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tf_name = new javax.swing.JTextField();
+        tf_cuser = new javax.swing.JTextField();
+        pf_passc = new javax.swing.JPasswordField();
+        jb_crear = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        pf_pass = new javax.swing.JPasswordField();
+        jb_crearu = new javax.swing.JButton();
+        jb_ingresar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cb_users = new javax.swing.JComboBox<>();
+
+        CrearUser.setPreferredSize(new java.awt.Dimension(800, 400));
+
+        bg2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel3.setText("Nombre:");
+        bg2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 24, 126, -1));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel4.setText("Username:");
+        bg2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 104, 126, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel5.setText("Password:");
+        bg2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 193, -1, -1));
+        bg2.add(tf_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 24, 360, 30));
+        bg2.add(tf_cuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 360, 30));
+        bg2.add(pf_passc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 360, 30));
+
+        jb_crear.setText("Crear");
+        jb_crear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crearMouseClicked(evt);
+            }
+        });
+        bg2.add(jb_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 100, -1));
+
+        javax.swing.GroupLayout CrearUserLayout = new javax.swing.GroupLayout(CrearUser.getContentPane());
+        CrearUser.getContentPane().setLayout(CrearUserLayout);
+        CrearUserLayout.setHorizontalGroup(
+            CrearUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CrearUserLayout.setVerticalGroup(
+            CrearUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(100, 0));
+        setPreferredSize(new java.awt.Dimension(800, 400));
+
+        jLabel1.setText("Username");
+
+        jb_crearu.setText("Crear User");
+        jb_crearu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crearuMouseClicked(evt);
+            }
+        });
+
+        jb_ingresar.setText("Ingresar");
+        jb_ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_ingresarMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("Password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pf_pass)
+                    .addComponent(jb_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_users, 0, 200, Short.MAX_VALUE))
+                .addContainerGap(462, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_crearu, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cb_users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(48, 48, 48)
+                .addComponent(jb_ingresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addComponent(jb_crearu)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jb_crearuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearuMouseClicked
+        this.setVisible(false);
+        CrearUser.pack();
+        CrearUser.setVisible(true);
+    }//GEN-LAST:event_jb_crearuMouseClicked
+
+    private void jb_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearMouseClicked
+        CrearUser.setVisible(false);
+        this.setVisible(true);
+        cb_users.addItem(tf_cuser.getText());
+        listaUsers.add(new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText()));
+    }//GEN-LAST:event_jb_crearMouseClicked
+
+    private void jb_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ingresarMouseClicked
+        if (cb_users.getSelectedItem().equals("Admin")) {
+            if (pf_pass.getText().equals("admin")) {
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
+            }
+        } else {
+            if (!listaUsers.get(cb_users.getSelectedIndex()).getContra().equals(pf_pass.getText())) {
+                JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
+            } else {
+                
+            }
+        }
+    }//GEN-LAST:event_jb_ingresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -76,7 +210,23 @@ public class Delivery extends javax.swing.JFrame {
             }
         });
     }
-
+    ArrayList<User> listaUsers = new ArrayList();
+    ArrayList<Res> listaRes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog CrearUser;
+    private javax.swing.JPanel bg2;
+    private javax.swing.JComboBox<String> cb_users;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jb_crear;
+    private javax.swing.JButton jb_crearu;
+    private javax.swing.JButton jb_ingresar;
+    private javax.swing.JPasswordField pf_pass;
+    private javax.swing.JPasswordField pf_passc;
+    private javax.swing.JTextField tf_cuser;
+    private javax.swing.JTextField tf_name;
     // End of variables declaration//GEN-END:variables
 }
