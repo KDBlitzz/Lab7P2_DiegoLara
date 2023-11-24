@@ -39,6 +39,17 @@ public class Delivery extends javax.swing.JFrame {
         tf_cuser = new javax.swing.JTextField();
         pf_passc = new javax.swing.JPasswordField();
         jb_crear = new javax.swing.JButton();
+        rest = new javax.swing.JDialog();
+        tp_restaurant = new javax.swing.JTabbedPane();
+        bg3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jb_addr = new javax.swing.JButton();
+        tf_namer = new javax.swing.JTextField();
+        tf_locat = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        cb_listr = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         pf_pass = new javax.swing.JPasswordField();
         jb_crearu = new javax.swing.JButton();
@@ -82,6 +93,64 @@ public class Delivery extends javax.swing.JFrame {
         CrearUserLayout.setVerticalGroup(
             CrearUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        rest.setPreferredSize(new java.awt.Dimension(800, 400));
+
+        bg3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel2.setText("Agregar Restaurante");
+        bg3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 220, -1));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel7.setText("Nombre:");
+        bg3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel8.setText("Ubicacion:");
+        bg3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jb_addr.setText("Agregar Restaurante");
+        jb_addr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_addrMouseClicked(evt);
+            }
+        });
+        bg3.add(jb_addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 160, -1));
+        bg3.add(tf_namer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 350, -1));
+        bg3.add(tf_locat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 350, -1));
+
+        tp_restaurant.addTab("tab1", bg3);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(cb_listr, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(320, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(cb_listr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(318, Short.MAX_VALUE))
+        );
+
+        tp_restaurant.addTab("tab2", jPanel1);
+
+        javax.swing.GroupLayout restLayout = new javax.swing.GroupLayout(rest.getContentPane());
+        rest.getContentPane().setLayout(restLayout);
+        restLayout.setHorizontalGroup(
+            restLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tp_restaurant)
+        );
+        restLayout.setVerticalGroup(
+            restLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tp_restaurant)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -157,13 +226,19 @@ public class Delivery extends javax.swing.JFrame {
         CrearUser.setVisible(false);
         this.setVisible(true);
         cb_users.addItem(tf_cuser.getText());
+        tf_name.setText("");
+        tf_cuser.setText("");
+        pf_passc.setText("");
         listaUsers.add(new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText()));
+        
     }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jb_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ingresarMouseClicked
         if (cb_users.getSelectedItem().equals("Admin")) {
             if (pf_pass.getText().equals("admin")) {
-                
+                this.setVisible(false);
+                rest.pack();
+                rest.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
             }
@@ -175,6 +250,10 @@ public class Delivery extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jb_ingresarMouseClicked
+
+    private void jb_addrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addrMouseClicked
+        cb_listr.addItem(tf_namer.getText());
+    }//GEN-LAST:event_jb_addrMouseClicked
 
     /**
      * @param args the command line arguments
@@ -211,22 +290,32 @@ public class Delivery extends javax.swing.JFrame {
         });
     }
     ArrayList<User> listaUsers = new ArrayList();
-    ArrayList<Res> listaRes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog CrearUser;
     private javax.swing.JPanel bg2;
+    private javax.swing.JPanel bg3;
+    private javax.swing.JComboBox<String> cb_listr;
     private javax.swing.JComboBox<String> cb_users;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jb_addr;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crearu;
     private javax.swing.JButton jb_ingresar;
     private javax.swing.JPasswordField pf_pass;
     private javax.swing.JPasswordField pf_passc;
+    private javax.swing.JDialog rest;
     private javax.swing.JTextField tf_cuser;
+    private javax.swing.JTextField tf_locat;
     private javax.swing.JTextField tf_name;
+    private javax.swing.JTextField tf_namer;
+    private javax.swing.JTabbedPane tp_restaurant;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,7 +14,7 @@ public class Res {
 
     private String nombre;
     private String ubicacion;
-    ArrayList<Producto> listaProd = new ArrayList();
+    private ArrayList<Producto> listaProd = new ArrayList();
     private double saldo = 0;
 
     public Res() {
