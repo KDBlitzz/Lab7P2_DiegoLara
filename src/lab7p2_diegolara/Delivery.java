@@ -4,7 +4,10 @@
  */
 package lab7p2_diegolara;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,16 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class Delivery extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Delivery
-     */
+    private AdministrarUser user;
+
     public Delivery() {
         initComponents();
         cb_users.addItem("Admin");
         tf_prod.setEnabled(false);
         tf_precio.setEnabled(false);
+        
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,11 +285,19 @@ public class Delivery extends javax.swing.JFrame {
         CrearUser.setVisible(false);
         this.setVisible(true);
         cb_users.addItem(tf_cuser.getText());
+        User u = new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText());
+        listaUsers.add(u);
+        user = new AdministrarUser("./Users.txt");
+        user.cargarArchivo();
+        user.getListaUsers().add(u);
+        try {
+            user.escribirArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tf_name.setText("");
         tf_cuser.setText("");
         pf_passc.setText("");
-        listaUsers.add(new User(tf_name.getText(), tf_cuser.getText(), pf_passc.getText()));
-        
     }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jb_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_ingresarMouseClicked
@@ -301,7 +313,7 @@ public class Delivery extends javax.swing.JFrame {
             if (!listaUsers.get(cb_users.getSelectedIndex()).getContra().equals(pf_pass.getText())) {
                 JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
             } else {
-
+                
             }
         }
     }//GEN-LAST:event_jb_ingresarMouseClicked

@@ -51,7 +51,7 @@ public class AdministrarUser {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             for (User t : listaUsers) {
-                bw.write("[" + "nombre: " + t.getNombre() + "," + "usuario: " + t.getUser() + "," + "contra: " + t.getContra() + "saldo: " + t.getSaldo() + "]\n");
+                bw.write("[" + "nombre: " + t.getNombre() + "," + "usuario: " + t.getUser() + "," + "contra: " + t.getContra() + "," + "saldo: " + t.getSaldo() + "]\n");
             }
             bw.flush();
         } catch (Exception ex) {
