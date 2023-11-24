@@ -51,7 +51,7 @@ public class AdministrarUser {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             for (User t : listaUsers) {
-                bw.write("[\n" + "nombre: " + t.getNombre() + ",\n" + "usuario: " + t.getUser() + ",\n" + "contra: " + t.getContra() + "]");
+                bw.write("[" + "nombre: " + t.getNombre() + "," + "usuario: " + t.getUser() + "," + "contra: " + t.getContra() + "]\n");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -66,9 +66,11 @@ public class AdministrarUser {
         if (archivo.exists()) {
             try {
                 sc = new Scanner(archivo);
-                sc.useDelimiter("]");
+                String token = "";
                 while (sc.hasNext()) {
-                    listaUsers.add(new User(sc.next(), sc.next(), sc.next()));
+                    token += sc.next();
+                    
+                    
                 }
             } catch (Exception ex) {
             }

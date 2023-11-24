@@ -58,6 +58,8 @@ public class Delivery extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         tf_precio = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        cb_elim = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pf_pass = new javax.swing.JPasswordField();
@@ -165,14 +167,33 @@ public class Delivery extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(267, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         tp_restaurant.addTab("Eliminar", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 755, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 373, Short.MAX_VALUE)
+        );
+
+        tp_restaurant.addTab("Visualizacion", jPanel3);
 
         javax.swing.GroupLayout restLayout = new javax.swing.GroupLayout(rest.getContentPane());
         rest.getContentPane().setLayout(restLayout);
@@ -339,6 +360,7 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JDialog CrearUser;
     private javax.swing.JPanel bg2;
     private javax.swing.JPanel bg3;
+    private javax.swing.JComboBox<String> cb_elim;
     private javax.swing.JComboBox<String> cb_listr;
     private javax.swing.JComboBox<String> cb_users;
     private javax.swing.JLabel jLabel1;
@@ -354,6 +376,7 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jb_addprod;
     private javax.swing.JButton jb_addr;
     private javax.swing.JButton jb_crear;
