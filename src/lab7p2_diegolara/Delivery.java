@@ -23,10 +23,9 @@ public class Delivery extends javax.swing.JFrame {
         cb_users.addItem("Admin");
         tf_prod.setEnabled(false);
         tf_precio.setEnabled(false);
-        
+
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,8 +70,6 @@ public class Delivery extends javax.swing.JFrame {
         jb_ingresar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cb_users = new javax.swing.JComboBox<>();
-
-        CrearUser.setPreferredSize(new java.awt.Dimension(800, 400));
 
         bg2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -174,7 +171,7 @@ public class Delivery extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(239, 239, 239)
                 .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +187,7 @@ public class Delivery extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGap(0, 795, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +211,6 @@ public class Delivery extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(100, 0));
-        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("Username");
 
@@ -313,14 +309,26 @@ public class Delivery extends javax.swing.JFrame {
             if (!listaUsers.get(cb_users.getSelectedIndex()).getContra().equals(pf_pass.getText())) {
                 JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
             } else {
-                
+
             }
         }
     }//GEN-LAST:event_jb_ingresarMouseClicked
 
     private void jb_addrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addrMouseClicked
         cb_listr.addItem(tf_namer.getText());
-        listaRes.add(new Res(tf_namer.getText(), tf_locat.getText()));
+
+        Res res = new Res(tf_namer.getText(), tf_locat.getText());
+        listaRes.add(res);
+        AdministrarRes r = new AdministrarRes("./Restaurantes.txt");
+        r.cargarArchivo();
+        r.getListaRest().add(res);
+        try {
+            r.escribirArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tf_namer.setText("");
+        tf_locat.setText("");
     }//GEN-LAST:event_jb_addrMouseClicked
 
     private void cb_listrItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_listrItemStateChanged
