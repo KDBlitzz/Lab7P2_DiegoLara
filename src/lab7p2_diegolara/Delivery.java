@@ -4,11 +4,15 @@
  */
 package lab7p2_diegolara;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -16,7 +20,11 @@ import javax.swing.JOptionPane;
  */
 public class Delivery extends javax.swing.JFrame {
 
+    private ArrayList<Res> temp;
     private AdministrarUser user;
+    private AdministrarRes r;
+    private File archivo = null;
+    private String[] arr;
 
     public Delivery() {
         initComponents();
@@ -63,6 +71,8 @@ public class Delivery extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         cb_elim = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_rest = new javax.swing.JTree();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pf_pass = new javax.swing.JPasswordField();
@@ -113,7 +123,7 @@ public class Delivery extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("Agregar Restaurante");
-        bg3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 220, -1));
+        bg3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 220, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel7.setText("Nombre:");
@@ -168,10 +178,10 @@ public class Delivery extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(239, 239, 239)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(188, Short.MAX_VALUE)
                 .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +197,7 @@ public class Delivery extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 527, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +206,23 @@ public class Delivery extends javax.swing.JFrame {
 
         tp_restaurant.addTab("Visualizacion", jPanel3);
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Restaurantes");
+        jt_rest.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jt_rest);
+
         javax.swing.GroupLayout restLayout = new javax.swing.GroupLayout(rest.getContentPane());
         rest.getContentPane().setLayout(restLayout);
         restLayout.setHorizontalGroup(
             restLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tp_restaurant)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, restLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tp_restaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         restLayout.setVerticalGroup(
             restLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tp_restaurant)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jLabel9.setText("jLabel9");
@@ -319,7 +337,7 @@ public class Delivery extends javax.swing.JFrame {
 
         Res res = new Res(tf_namer.getText(), tf_locat.getText());
         listaRes.add(res);
-        AdministrarRes r = new AdministrarRes("./Restaurantes.txt");
+        r = new AdministrarRes("./Restaurantes.txt");
         r.cargarArchivo();
         r.getListaRest().add(res);
         try {
@@ -327,8 +345,10 @@ public class Delivery extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         tf_namer.setText("");
         tf_locat.setText("");
+
     }//GEN-LAST:event_jb_addrMouseClicked
 
     private void cb_listrItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_listrItemStateChanged
@@ -337,7 +357,29 @@ public class Delivery extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_listrItemStateChanged
 
     private void jb_addprodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addprodMouseClicked
-        listaRes.get(cb_listr.getSelectedIndex()).getListaProd().add(new Producto(tf_prod.getText(), Double.parseDouble(tf_precio.getText())));
+        try {
+            Producto p = new Producto(tf_prod.getText(), Double.parseDouble(tf_precio.getText()));
+
+            r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().add(p);
+            r.escribirArchivo();
+        } catch (IOException ex) {
+            Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTreeModel m = (DefaultTreeModel) jt_rest.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode nombre = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getNombre());
+        DefaultMutableTreeNode prod = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().toString());
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if (raiz.getChildAt(i).toString().equals(r.getListaRest().get(cb_listr.getSelectedIndex()).getNombre())) {
+                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(prod);
+            }
+        }
+        nombre.add(prod);
+        raiz.add(nombre);
+        m.reload();
+        tf_prod.setText("");
+        tf_precio.setText("");
     }//GEN-LAST:event_jb_addprodMouseClicked
 
     /**
@@ -397,11 +439,13 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_addprod;
     private javax.swing.JButton jb_addr;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crearu;
     private javax.swing.JButton jb_ingresar;
+    private javax.swing.JTree jt_rest;
     private javax.swing.JPasswordField pf_pass;
     private javax.swing.JPasswordField pf_passc;
     private javax.swing.JDialog rest;

@@ -1,0 +1,1 @@
+[nombre: KFC,ubicacion: unitec,productos: [pollo, papas],saldo: 0.0]
