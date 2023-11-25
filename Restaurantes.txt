@@ -1,1 +1,7 @@
-[nombre: KFC,ubicacion: unitec,productos: [pollo, papas],saldo: 0.0]
+[nombre: asdf,ubicacion: asfsad,productos: [],saldo: 0.0]
+[nombre: asdsf,ubicacion: asfaasd,productos: [],saldo: 0.0]
+[nombre: asdafas,ubicacion: asdasfas,productos: [],saldo: 0.0]
+[nombre: asdasf,ubicacion: asdasf,productos: [],saldo: 0.0]
+[nombre: asfasd,ubicacion: asdfas,productos: [],saldo: 0.0]
+[nombre: asdasd,ubicacion: asdasdas,productos: [],saldo: 0.0]
+[nombre: adsfas,ubicacion: asdaf,productos: [],saldo: 0.0]

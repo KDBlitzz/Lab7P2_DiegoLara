@@ -310,7 +310,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="188" max="32767" attributes="0"/>
-                          <Component id="cb_elim" min="-2" pref="249" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cb_elim" min="-2" pref="249" max="-2" attributes="0"/>
+                              <Component id="jb_elim" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -320,7 +323,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="cb_elim" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="319" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="jb_elim" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="255" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -335,6 +340,14 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="jb_elim">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Eliminar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_elimMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

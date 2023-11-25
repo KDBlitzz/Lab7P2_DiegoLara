@@ -48,7 +48,7 @@ public class AdministrarRes {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(archivo, false);
+            fw = new FileWriter(archivo, true);
             bw = new BufferedWriter(fw);
             for (Res t : listaRest) {
                 bw.write("[" + "nombre: " + t.getNombre() + "," + "ubicacion: " + t.getUbicacion() + "," + "productos: " + t.getListaProd() + "," + "saldo: " + t.getSaldo() + "]\n");

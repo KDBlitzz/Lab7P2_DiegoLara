@@ -70,6 +70,7 @@ public class Delivery extends javax.swing.JFrame {
         tf_precio = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         cb_elim = new javax.swing.JComboBox<>();
+        jb_elim = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_rest = new javax.swing.JTree();
@@ -174,13 +175,22 @@ public class Delivery extends javax.swing.JFrame {
 
         tp_restaurant.addTab("Add Product", jPanel1);
 
+        jb_elim.setText("Eliminar");
+        jb_elim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_elimMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(188, Short.MAX_VALUE)
-                .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(90, 90, 90))
         );
         jPanel2Layout.setVerticalGroup(
@@ -188,7 +198,9 @@ public class Delivery extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(cb_elim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jb_elim)
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         tp_restaurant.addTab("Eliminar", jPanel2);
@@ -345,7 +357,7 @@ public class Delivery extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        cb_elim.addItem(tf_namer.getText());
         tf_namer.setText("");
         tf_locat.setText("");
 
@@ -357,30 +369,41 @@ public class Delivery extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_listrItemStateChanged
 
     private void jb_addprodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addprodMouseClicked
-        try {
-            Producto p = new Producto(tf_prod.getText(), Double.parseDouble(tf_precio.getText()));
+        Producto p = new Producto(tf_prod.getText(), Double.parseDouble(tf_precio.getText()));
+        r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().add(p);
 
-            r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().add(p);
-            r.escribirArchivo();
-        } catch (IOException ex) {
-            Logger.getLogger(Delivery.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         DefaultTreeModel m = (DefaultTreeModel) jt_rest.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-        DefaultMutableTreeNode nombre = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getNombre());
-        DefaultMutableTreeNode prod = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().toString());
+        int flag = -1;
         for (int i = 0; i < raiz.getChildCount(); i++) {
             if (raiz.getChildAt(i).toString().equals(r.getListaRest().get(cb_listr.getSelectedIndex()).getNombre())) {
+                DefaultMutableTreeNode prod = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().toString());
                 ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(prod);
+                flag = 1;
             }
         }
-        nombre.add(prod);
-        raiz.add(nombre);
+
+        if (flag == -1) {
+            DefaultMutableTreeNode nombre = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getNombre());
+            DefaultMutableTreeNode prod = new DefaultMutableTreeNode(r.getListaRest().get(cb_listr.getSelectedIndex()).getListaProd().toString());
+            nombre.add(prod);
+            raiz.add(nombre);
+        }
+        System.out.println("No añade otro restaurante, da exception :D");
         m.reload();
         tf_prod.setText("");
         tf_precio.setText("");
     }//GEN-LAST:event_jb_addprodMouseClicked
+
+    private void jb_elimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_elimMouseClicked
+        r.getListaRest().remove(cb_elim.getSelectedIndex());
+        DefaultTreeModel m;
+        Object v1 = jt_rest.getModel();
+        DefaultMutableTreeNode nodo_seleccionado = (DefaultMutableTreeNode) v1;
+        m = (DefaultTreeModel) jt_rest.getModel();
+        m.removeNodeFromParent(nodo_seleccionado);
+        m.reload();
+    }//GEN-LAST:event_jb_elimMouseClicked
 
     /**
      * @param args the command line arguments
@@ -444,6 +467,7 @@ public class Delivery extends javax.swing.JFrame {
     private javax.swing.JButton jb_addr;
     private javax.swing.JButton jb_crear;
     private javax.swing.JButton jb_crearu;
+    private javax.swing.JButton jb_elim;
     private javax.swing.JButton jb_ingresar;
     private javax.swing.JTree jt_rest;
     private javax.swing.JPasswordField pf_pass;
